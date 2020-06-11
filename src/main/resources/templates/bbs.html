@@ -36,7 +36,7 @@
 		<i th:text="${toukou.hi}"></i>
 	</div>
 
-	<p th:text="${toukou.body}"></p>
+	<pre th:text="${toukou.body}"></pre>
 
 	<div th:if="${session.user}">
 	<a th:href="|/del/${toukou.tid}|" th:if="${toukou.uid== session.user.uid}">削除</a>
