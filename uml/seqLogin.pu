@@ -1,0 +1,26 @@
+@startuml
+title ログイン
+autonumber "#."
+
+actor ユーザ
+participant index
+participant mes.html
+participant BBSController
+participant HttpSession
+database UserRepository
+entity User
+
+ユーザ -[#green]> index:入力
+index --> BBSController:ユーザ名、パスワード
+BBSController-> UserRepository:ユーザ名、パスワードで検索
+UserRepository -> User : 生成
+UserRepository -> BBSController : User
+
+alt ログイン成功
+BBSController-> HttpSession:User
+BBSController--> ユーザ:indexにリダイレクト
+else ログイン失敗
+BBSController--> mes.html:エラーメッセージ
+mes.html --> ユーザ:表示
+end
+@enduml

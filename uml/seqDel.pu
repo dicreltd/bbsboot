@@ -1,0 +1,28 @@
+@startuml
+title 削除確認
+autonumber "#."
+
+actor ユーザ
+participant bbs.html
+participant del.html
+participant BBSController
+database ToukouRepository
+entity Toukou
+participant HttpSession
+
+ユーザ -[#green]> bbs.html:削除クリック
+bbs.html -> BBSController:del(tid)
+BBSController-> ToukouRepository:findById(tid)
+ToukouRepository-> Toukou:生成
+ToukouRepository-->BBSController:toukou
+BBSController-> HttpSession:setAttribute(toukou)
+BBSController-> del.html:フォワード
+del.html --> ユーザ:表示
+ユーザ -[#green]> del.html:削除ボタン押下
+del.html -> BBSController:delDone(tid)
+BBSController-> HttpSession:getAttribute("toukou")
+HttpSession->Toukou:取得
+HttpSession-->BBSController:取得
+BBSController-> ToukouRepository:delete(toukou)
+BBSController-> ユーザ:indexリダイレクト
+@enduml

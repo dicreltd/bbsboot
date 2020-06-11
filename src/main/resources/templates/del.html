@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>投稿削除</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1>投稿削除</h1>
+
+<p>以下の内容を削除しますか？</p>
+
+<p th:text="${session.toukou.body}"></p>
+
+<form method="post" action="/delDone">
+<input type="submit" value="削除">
+</form>
+
+
+</body>
+</html>

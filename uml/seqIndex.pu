@@ -1,0 +1,17 @@
+@startuml
+title 表示
+autonumber "#."
+
+actor ユーザ
+participant index.html
+participant BBSController
+database ToukouRepository
+participant Toukou
+
+ユーザ -[#green]> BBSController:/index
+BBSController-> ToukouRepository:findAll()
+ToukouRepository --> Toukou:生成
+ToukouRepository --> BBSController:List<Toukou>
+BBSController--> index.html:List<Toukou>
+index.html --> ユーザ:表示
+@enduml

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>掲示板</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1>掲示板</h1>
+
+<div th:if="${session.user==null}">
+
+<form method="post" action="login">
+ユーザ名　：<input type="text" name="uname"><br>
+パスワード：<input type="text" name="pass"><br>
+<input type="submit" value="ログイン">
+</form>
+
+</div>
+
+<div th:if="${session.user}">
+
+<form method="post" action="write">
+<input type="hidden" name="uid" th:value="${session.user.uid}">
+<textarea name="body"></textarea><br>
+<input type="submit" value="投稿">
+</form>
+
+<p><a href="logout">ログアウト</a></p>
+</div>
+
+<div th:each="toukou : ${list}" class="toukou">
+	<div>
+		<b th:text="${toukou.user.uname}"></b>
+		<i th:text="${toukou.hi}"></i>
+	</div>
+
+	<p th:text="${toukou.body}"></p>
+
+	<div th:if="${session.user}">
+	<a th:href="|/del/${toukou.tid}|" th:if="${toukou.uid== session.user.uid}">削除</a>
+	</div>
+</div>
+
+
+</body>
+</html>

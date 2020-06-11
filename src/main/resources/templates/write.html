@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>投稿内容確認</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1>投稿内容確認</h1>
+
+<p>以下の内容で投稿します</p>
+
+<p th:text="${session.toukou.body}"></p>
+
+<form method="post" action="writeDone">
+<input type="submit" value="投稿">
+</form>
+
+
+</body>
+</html>

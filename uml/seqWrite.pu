@@ -1,0 +1,23 @@
+@startuml
+title 書き込み確認
+autonumber "#."
+
+actor ユーザ
+participant "/index"
+participant write.html
+participant BBSController
+participant Toukou
+participant HttpSession
+
+ユーザ -[#green]> "/index":フォーム送信
+"/index" -> BBSController:write()
+BBSController-> Toukou:生成
+BBSController-> HttpSession:setAttribute(Toukou)
+BBSController--> write.html:フォワード
+write.html --> ユーザ:表示
+ユーザ -[#green]> write.html:書き込みボタン押下
+write.html -> BBSController:writeDone()
+BBSController-> HttpSession:getAttribute(Toukou)
+BBSController-> ToukouRepository:save(toukou)
+BBSController--> ユーザ:indexリダイレクト
+@enduml

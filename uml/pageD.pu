@@ -1,0 +1,19 @@
+@startuml
+title 画面遷移
+index:掲示板トップ
+write:書き込み確認
+writeDone:書き込み実行\nredirect:/index
+login:ログイン\nredirect:/index
+logout:ログアウト\nredirect:/index
+del : /tid\n削除確認
+delDone:削除実行\nredirect:/index
+
+[*]->index
+index-->login:ログイン
+index-->logout:ログアウト
+index-->write:書き込み
+write-->writeDone:書き込み
+index--> del:削除
+del --> delDone:削除
+@enduml
+

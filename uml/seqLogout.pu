@@ -1,0 +1,17 @@
+@startuml
+title ログイン
+autonumber "#."
+
+actor ユーザ
+participant index
+participant logout
+participant BBSController
+participant HttpSession
+
+ユーザ -[#green]> index:クリック
+index --> logout:遷移
+logout -> BBSController
+BBSController--> HttpSession : ログイン情報消去
+BBSController--> ユーザ:indexにリダイレクト
+
+@enduml

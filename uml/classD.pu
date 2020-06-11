@@ -1,0 +1,41 @@
+@startuml
+package model {
+	class User{
+		-uid :int
+		-uname :String
+		-pass :String
+	}
+	class Toukou{
+		-tid :int
+		-uid :int
+		-body :String
+		-hi :Date
+	}
+	class UserRepository{
+		+findById(int tid)
+		+login(String uname,String pass)
+	}
+	class ToukouRepository{
+		+findAll()
+		+findById(int tid)
+		+save(Toukou t)
+		+delete(Toukou t)
+	}
+}
+package controller {
+	class BBSController{
+		+index()
+		+write()
+		+writeDone()
+		+login()
+		+logout()
+		+del()
+		+delDone()
+	}
+}
+User -o Toukou
+Toukou --o ToukouRepository
+User --o UserRepository
+BBSController --> ToukouRepository
+BBSController --> UserRepository
+@enduml
